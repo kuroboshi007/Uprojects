@@ -1,3 +1,11 @@
+// 图片大小和分数
+var cell_width = 101,
+    cell_height = 83,
+    floatingScore = {
+    water: +100,
+    enemy: -200
+};
+
 // 这是我们的玩家要躲避的敌人
 var Enemy = function(x, y, speed) {
     // 要应用到每个敌人的实例的变量写在这里
@@ -17,6 +25,9 @@ Enemy.prototype.update = function(dt) {
     this.x += dt * this.speed;
     // console.log(this);
     this.checkCollision(player);
+    if (this.x >= 5 * cell_width) {
+        this.x = -1 * cell_width;
+    }
 };
 
 // 此为游戏必须的函数，用来在屏幕上画出敌人，
@@ -87,7 +98,7 @@ Player.prototype.handleInput = function(dt) {
 
 // 现在实例化你的所有对象
 // 把所有敌人的对象都放进一个叫 allEnemies 的数组里面
-var allEnemies = [new Enemy(202, 83 * 2 + 55, 20)]
+var allEnemies = [new Enemy(202, 83 * 2 + 55, 50)]
 // 把玩家对象放进一个叫 player 的变量里面
 var player = new Player(202, 83 * 2 + 55)
 // 这段代码监听游戏玩家的键盘点击事件并且代表将按键的关键数字送到 Play.handleInput() 方法里面。你不需要再更改这段代码了。
@@ -101,3 +112,4 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+// https://github.com/wenxiz/Udacity-Projects-P5
